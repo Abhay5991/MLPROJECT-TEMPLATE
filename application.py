@@ -38,12 +38,10 @@ def predict_datapoint():
         results=predict_pipeline.predict(pred_df)
         return render_template('home.html',results=results[0])
     
-    
-port = int(os.getenv("PORT"))
+
 if __name__=="__main__":
-    host = '0.0.0.0'
-    httpd = simple_server.make_server(host, port, app)
-    httpd.serve_forever()
+    app.run(host="0.0.0.0")
+    
       
 
 
