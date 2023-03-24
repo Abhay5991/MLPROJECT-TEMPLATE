@@ -1,6 +1,8 @@
 from flask import Flask,request,render_template
 import numpy as np
 import pandas as pd
+from wsgiref import simple_server
+import os
 
 from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
@@ -37,8 +39,11 @@ def predict_datapoint():
         return render_template('home.html',results=results[0])
     
     
-
+port = int(os.getenv("PORT"))
 if __name__=="__main__":
-    app.run(host="0.0.0.0")        
+    host = '0.0.0.0'
+    httpd = simple_server.make_server(host, port, app)
+    httpd.serve_forever()
+      
 
 
